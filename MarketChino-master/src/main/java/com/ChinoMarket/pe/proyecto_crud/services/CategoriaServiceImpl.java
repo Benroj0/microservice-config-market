@@ -32,7 +32,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public Categoria obtenerCategoriaPorNombre(String nombre) {
-        return categoriaRepository.findByNombre(nombre);
+        return categoriaRepository.findBynombre(nombre);
     }
 
     @Override

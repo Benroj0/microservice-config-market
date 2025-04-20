@@ -24,8 +24,8 @@ public class DetPedidoServiceImpl implements DetPedidoService {
     }
 
     @Override
-    public List<DetPedido> obtenerDetPedidoPorPedidoId(Long pedidoId) {
-        return detPedidoRepository.findByPedidoId(pedidoId);
+    public List<DetPedido> obtenerDetPedidoPorPedidoId(Long IdP) {
+        return detPedidoRepository.findByIdDP(IdP);
     }
 
     @Override

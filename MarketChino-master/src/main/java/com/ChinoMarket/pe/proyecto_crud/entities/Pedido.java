@@ -1,96 +1,104 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "pedido")
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdP;
-    private Long Numpedido;
-    private String EstPedido;
-    private LocalDate FechaEmi;
-    private Long TotalPago;
-    private String TipoComprobante;
-    private Long NumeroComprobante;
-    private String MetodoPago;
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "IdC", referencedColumnName = "id")
-    private List<Cliente> cliente;
+    private Long idP;
+    private Long numpedido;
+    private String estPedido;
+    private LocalDate fechaEmi;
+    private Long totalPago;
+    private String tipoComprobante;
+    private Long numeroComprobante;
+    private String metodoPago;
+    private String estado;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "idC", referencedColumnName = "idC")
+    private Cliente cliente;
 
     public Long getIdP() {
-        return IdP;
+        return idP;
     }
 
     public void setIdP(Long idP) {
-        IdP = idP;
+        this.idP = idP;
     }
 
     public Long getNumpedido() {
-        return Numpedido;
+        return numpedido;
     }
 
     public void setNumpedido(Long numpedido) {
-        Numpedido = numpedido;
+        this.numpedido = numpedido;
     }
 
     public String getEstPedido() {
-        return EstPedido;
+        return estPedido;
     }
 
     public void setEstPedido(String estPedido) {
-        EstPedido = estPedido;
+        this.estPedido = estPedido;
     }
 
     public LocalDate getFechaEmi() {
-        return FechaEmi;
+        return fechaEmi;
     }
 
     public void setFechaEmi(LocalDate fechaEmi) {
-        FechaEmi = fechaEmi;
+        this.fechaEmi = fechaEmi;
     }
 
     public Long getTotalPago() {
-        return TotalPago;
+        return totalPago;
     }
 
     public void setTotalPago(Long totalPago) {
-        TotalPago = totalPago;
+        this.totalPago = totalPago;
     }
 
     public String getTipoComprobante() {
-        return TipoComprobante;
+        return tipoComprobante;
     }
 
     public void setTipoComprobante(String tipoComprobante) {
-        TipoComprobante = tipoComprobante;
+        this.tipoComprobante = tipoComprobante;
     }
 
     public Long getNumeroComprobante() {
-        return NumeroComprobante;
+        return numeroComprobante;
     }
 
     public void setNumeroComprobante(Long numeroComprobante) {
-        NumeroComprobante = numeroComprobante;
+        this.numeroComprobante = numeroComprobante;
     }
 
     public String getMetodoPago() {
-        return MetodoPago;
+        return metodoPago;
     }
 
     public void setMetodoPago(String metodoPago) {
-        MetodoPago = metodoPago;
+        this.metodoPago = metodoPago;
     }
 
-    public List<Cliente> getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(List<Cliente> cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

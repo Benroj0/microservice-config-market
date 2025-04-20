@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "cliente")
+@RequestMapping("/chinomarket-crud")
 @Tag(name = "Cliente resource")
 public class ClienteController {
     private final ClienteService clienteService;
@@ -21,7 +21,7 @@ public class ClienteController {
     }
 
     // Crear cliente (POST)
-    @PostMapping
+    @PostMapping("/cliente")
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
         Cliente nuevoCliente = clienteService.create(cliente);
         return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);

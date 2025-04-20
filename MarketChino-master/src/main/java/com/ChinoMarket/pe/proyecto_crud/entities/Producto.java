@@ -8,80 +8,81 @@ import jakarta.persistence.*;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdPro;
-    private String Nombre;
-    private String Desc;
-    private String Imagen;
-    private Long Cantidad;
-    private Long Precio;
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "IdC", referencedColumnName = "id")
-    private Long IdC;
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "IdCat", referencedColumnName = "id")
-    private Long IdCat;
+    @Column(name = "idpro")
+    private Long idPro;
+    private String nombre;
+    private String descripcion;
+    private String imagen;
+    private Long cantidad;
+    private Long precio;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "idc", referencedColumnName = "idc")
+    private Cliente cliente;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "idcat", referencedColumnName = "idcat")
+    private Categoria categoria;
 
     public Long getIdPro() {
-        return IdPro;
+        return idPro;
     }
 
     public void setIdPro(Long idPro) {
-        IdPro = idPro;
+        this.idPro = idPro;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
-    public String getDesc() {
-        return Desc;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDesc(String desc) {
-        Desc = desc;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getImagen() {
-        return Imagen;
+        return imagen;
     }
 
     public void setImagen(String imagen) {
-        Imagen = imagen;
+        this.imagen = imagen;
     }
 
     public Long getCantidad() {
-        return Cantidad;
+        return cantidad;
     }
 
     public void setCantidad(Long cantidad) {
-        Cantidad = cantidad;
+        this.cantidad = cantidad;
     }
 
     public Long getPrecio() {
-        return Precio;
+        return precio;
     }
 
     public void setPrecio(Long precio) {
-        Precio = precio;
+        this.precio = precio;
     }
 
-    public Long getIdC() {
-        return IdC;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdC(Long idC) {
-        IdC = idC;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Long getIdCat() {
-        return IdCat;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCat(Long idCat) {
-        IdCat = idCat;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

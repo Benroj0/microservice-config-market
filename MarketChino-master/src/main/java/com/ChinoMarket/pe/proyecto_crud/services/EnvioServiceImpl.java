@@ -25,7 +25,7 @@ public class EnvioServiceImpl implements EnvioService {
 
     @Override
     public List<Envio> obtenerEnviosPorClienteId(Long clienteId) {
-        return envioRepository.findByClienteId(clienteId);
+        return envioRepository.findByCliente_IdC(clienteId);
     }
 
     @Override
