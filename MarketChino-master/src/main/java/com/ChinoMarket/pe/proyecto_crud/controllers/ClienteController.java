@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "cliente")
-@Tag(name = "Cliente resource")
+@Tag(name = "CLIENTES")
 public class ClienteController {
     private final ClienteService clienteService;
 
@@ -49,10 +49,10 @@ public class ClienteController {
             if (cliente != null) {
                 return new ResponseEntity<>(cliente, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Cliente no encontrado
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT); // Si ocurre un conflicto de actualización
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 

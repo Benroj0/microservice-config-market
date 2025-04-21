@@ -18,10 +18,9 @@ public class Producto {
     private Long cantidad;
     private Long precio;
 
-    // Relación ManyToOne (Un Producto pertenece a una Categoria)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", referencedColumnName = "idCat")
-    @JsonIgnore
+    //@JsonIgnore
     private Categoria categoria;
 
 

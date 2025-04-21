@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "categoria")
-@Tag(name = "Categoria resource")
+@Tag(name = "CATEGORIAS")
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
@@ -48,7 +48,7 @@ public class CategoriaController {
         if (categoria != null) {
             return new ResponseEntity<>(categoria, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Categoria no encontrada
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
