@@ -1,26 +1,29 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "producto")
-
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idpro")
+    @Column(name = "IdPro")
     private Long idPro;
     private String nombre;
     private String descripcion;
     private String imagen;
     private Long cantidad;
     private Long precio;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "idc", referencedColumnName = "idc")
-    private Cliente cliente;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "idcat", referencedColumnName = "idcat")
+
+    // Relación ManyToOne (Un Producto pertenece a una Categoria)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", referencedColumnName = "idCat")
+    @JsonIgnore
     private Categoria categoria;
+
 
     public Long getIdPro() {
         return idPro;
@@ -46,6 +49,22 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
+    public Long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Long precio) {
+        this.precio = precio;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -60,29 +79,5 @@ public class Producto {
 
     public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public Long getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Long precio) {
-        this.precio = precio;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 }

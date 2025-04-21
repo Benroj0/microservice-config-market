@@ -1,25 +1,31 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido")
 public class Pedido {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idP;
     private Long numpedido;
-    private String estPedido;
-    private LocalDate fechaEmi;
-    private Long totalPago;
-    private String tipoComprobante;
-    private Long numeroComprobante;
-    private String metodoPago;
     private String estado;
+    private LocalDate dechaEmi;
+    private Long totalpago;
+    private String tipocomprobante;
+    private Long numerocomprobante;
+    private String metodopago;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "idC", referencedColumnName = "idC")
+    // Relación OneToMany (Un Pedido puede tener muchos DetPedido)
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DetPedido> detallesPedido;  // Relación con DetPedido
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Long getIdP() {
@@ -38,52 +44,36 @@ public class Pedido {
         this.numpedido = numpedido;
     }
 
-    public String getEstPedido() {
-        return estPedido;
+    public LocalDate getDechaEmi() {
+        return dechaEmi;
     }
 
-    public void setEstPedido(String estPedido) {
-        this.estPedido = estPedido;
+    public void setDechaEmi(LocalDate dechaEmi) {
+        this.dechaEmi = dechaEmi;
     }
 
-    public LocalDate getFechaEmi() {
-        return fechaEmi;
+    public Long getTotalpago() {
+        return totalpago;
     }
 
-    public void setFechaEmi(LocalDate fechaEmi) {
-        this.fechaEmi = fechaEmi;
+    public void setTotalpago(Long totalpago) {
+        this.totalpago = totalpago;
     }
 
-    public Long getTotalPago() {
-        return totalPago;
+    public String getTipocomprobante() {
+        return tipocomprobante;
     }
 
-    public void setTotalPago(Long totalPago) {
-        this.totalPago = totalPago;
+    public void setTipocomprobante(String tipocomprobante) {
+        this.tipocomprobante = tipocomprobante;
     }
 
-    public String getTipoComprobante() {
-        return tipoComprobante;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setTipoComprobante(String tipoComprobante) {
-        this.tipoComprobante = tipoComprobante;
-    }
-
-    public Long getNumeroComprobante() {
-        return numeroComprobante;
-    }
-
-    public void setNumeroComprobante(Long numeroComprobante) {
-        this.numeroComprobante = numeroComprobante;
-    }
-
-    public String getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(String metodoPago) {
-        this.metodoPago = metodoPago;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Cliente getCliente() {
@@ -94,11 +84,28 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public String getEstado() {
-        return estado;
+    public Long getNumerocomprobante() {
+        return numerocomprobante;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setNumerocomprobante(Long numerocomprobante) {
+        this.numerocomprobante = numerocomprobante;
+    }
+
+    public String getMetodopago() {
+        return metodopago;
+    }
+
+    public void setMetodopago(String metodopago) {
+        this.metodopago = metodopago;
+    }
+
+    public List<DetPedido> getDetallesPedido() {
+        return detallesPedido;
+    }
+
+    public void setDetallesPedido(List<DetPedido> detallesPedido) {
+        this.detallesPedido = detallesPedido;
     }
 }
+

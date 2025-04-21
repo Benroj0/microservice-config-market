@@ -4,49 +4,29 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "detProducto")
+@Table(name = "det_producto")
 public class DetProducto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idA;
-    private Integer entrada;
-    private Integer salida;
-    private String descripcion;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "IdPro", referencedColumnName = "IdPro")
+    // Relación ManyToOne (Cada DetProducto pertenece a un Producto)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdPro", referencedColumnName = "IdPro") // Referencia a Producto
     private Producto producto;
 
-    public Long getIdA() {
-        return idA;
+    // Otros atributos
+    private Long cantidad;
+    private Long precio;
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setIdA(Long idA) {
-        this.idA = idA;
-    }
-
-    public Integer getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(Integer entrada) {
-        this.entrada = entrada;
-    }
-
-    public Integer getSalida() {
-        return salida;
-    }
-
-    public void setSalida(Integer salida) {
-        this.salida = salida;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Producto getProducto() {
@@ -55,5 +35,21 @@ public class DetProducto {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public Long getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Long precio) {
+        this.precio = precio;
     }
 }

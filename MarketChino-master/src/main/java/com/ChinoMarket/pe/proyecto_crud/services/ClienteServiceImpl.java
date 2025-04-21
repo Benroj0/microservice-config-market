@@ -5,6 +5,7 @@ import com.ChinoMarket.pe.proyecto_crud.entities.Cliente;
 import com.ChinoMarket.pe.proyecto_crud.repository.ClienteRepository;
 import jakarta.persistence.IdClass;
 import jakarta.transaction.Transactional;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +23,15 @@ public class ClienteServiceImpl  implements ClienteService {
     }
 
 
-    @Override
+    @Transactional
     public Cliente create(Cliente cliente) {
-        return clienteRepository.save(cliente);
+        try {
+            return clienteRepository.save(cliente);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al crear el cliente: " + e.getMessage());
+        }
     }
+
 
     @Override
     public Cliente readById(Long idC) {
@@ -43,15 +49,25 @@ public class ClienteServiceImpl  implements ClienteService {
         Optional<Cliente> optionalCliente = clienteRepository.findById(idC);
         if (optionalCliente.isPresent()) {
             Cliente clienteExistente = optionalCliente.get();
-            clienteExistente.setNombres(clienteActualizado.getNombres());
-            clienteExistente.setEmail(clienteActualizado.getEmail());
-            clienteExistente.setPassword(clienteActualizado.getPassword());
-            clienteExistente.setCelular(clienteActualizado.getCelular());
-            clienteExistente.setDireccion(clienteActualizado.getDireccion());
-            return clienteRepository.save(clienteExistente);
+            // Verificamos si los datos han cambiado
+            if (!clienteExistente.equals(clienteActualizado)) {
+                clienteExistente.setNombres(clienteActualizado.getNombres());
+                clienteExistente.setEmail(clienteActualizado.getEmail());
+                clienteExistente.setPassword(clienteActualizado.getPassword());
+                clienteExistente.setCelular(clienteActualizado.getCelular());
+                clienteExistente.setDireccion(clienteActualizado.getDireccion());
+                return clienteRepository.save(clienteExistente);
+            } else {
+                throw new RuntimeException("No se ha hecho ningún cambio en los datos del cliente");
+            }
         }
         return null;
     }
+
+
+
+
+
 
 
     @Override

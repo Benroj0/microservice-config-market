@@ -10,4 +10,5 @@ public interface ProductoService {
     Producto obtenerProductoPorId(Long id);
     Producto obtenerProductoPorNombre(String nombre);
     void eliminarProducto(Long id);
+    Producto actualizarProducto(Long id, Producto productoActualizado);
 }

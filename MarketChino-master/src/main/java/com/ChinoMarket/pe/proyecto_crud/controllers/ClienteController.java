@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/chinomarket-crud")
+@RequestMapping(path = "cliente")
 @Tag(name = "Cliente resource")
 public class ClienteController {
     private final ClienteService clienteService;
@@ -21,7 +21,7 @@ public class ClienteController {
     }
 
     // Crear cliente (POST)
-    @PostMapping("/cliente")
+    @PostMapping
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
         Cliente nuevoCliente = clienteService.create(cliente);
         return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
@@ -44,11 +44,15 @@ public class ClienteController {
     // Actualizar cliente (PUT)
     @PutMapping("/{idC}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable Long idC, @RequestBody Cliente clienteActualizado) {
-        Cliente cliente = clienteService.update(idC, clienteActualizado);
-        if (cliente != null) {
-            return new ResponseEntity<>(cliente, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        try {
+            Cliente cliente = clienteService.update(idC, clienteActualizado);
+            if (cliente != null) {
+                return new ResponseEntity<>(cliente, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Cliente no encontrado
+            }
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT); // Si ocurre un conflicto de actualización
         }
     }
 

@@ -1,5 +1,4 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -30,14 +29,6 @@ public class Cliente {
         this.nombres = nombres;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -61,4 +52,14 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+
+

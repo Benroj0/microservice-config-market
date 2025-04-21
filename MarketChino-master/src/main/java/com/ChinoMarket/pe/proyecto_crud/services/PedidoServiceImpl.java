@@ -24,8 +24,8 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<Pedido> obtenerPedidosPorClienteId(Long clienteId) {
-        return pedidoRepository.findByCliente_IdC(clienteId);
+    public List<Pedido> obtenerPedidosPorClienteId(Long clienteIdC) {
+        return pedidoRepository.findByCliente_IdC(clienteIdC);
     }
 
     @Override
