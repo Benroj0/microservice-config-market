@@ -2,40 +2,60 @@ package com.ChinoMarket.pe.proyecto_crud.controllers;
 
 import com.ChinoMarket.pe.proyecto_crud.entities.Categoria;
 import com.ChinoMarket.pe.proyecto_crud.services.CategoriaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categorias")
+@RequestMapping(path = "categoria")
+@Tag(name = "Categoria resource")
 public class CategoriaController {
 
-    @Autowired
-    private CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
+    public CategoriaController(CategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
+    }
+
+    // Crear categoría (POST)
     @PostMapping
-    public Categoria crearCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.crearCategoria(categoria);
+    public ResponseEntity<Categoria> createCategoria(@RequestBody Categoria categoria) {
+        Categoria nuevaCategoria = categoriaService.crearCategoria(categoria);
+        return new ResponseEntity<>(nuevaCategoria, HttpStatus.CREATED);
     }
 
+    // Obtener categoría por ID (GET)
+    @GetMapping("/{idCat}")
+    public ResponseEntity<Categoria> getCategoriaById(@PathVariable Long idCat) {
+        Categoria categoria = categoriaService.obtenerCategoriaPorId(idCat);
+        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    }
+
+    // Obtener todas las categorías (GET)
     @GetMapping
-    public List<Categoria> obtenerTodasLasCategorias() {
-        return categoriaService.obtenerTodasLasCategorias();
+    public ResponseEntity<List<Categoria>> getAllCategorias() {
+        List<Categoria> categorias = categoriaService.obtenerTodasLasCategorias();
+        return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public Categoria obtenerCategoriaPorId(@PathVariable Long id) {
-        return categoriaService.obtenerCategoriaPorId(id);
+    // Actualizar categoría (PUT)
+    @PutMapping("/{idCat}")
+    public ResponseEntity<Categoria> updateCategoria(@PathVariable Long idCat, @RequestBody Categoria categoriaActualizada) {
+        Categoria categoria = categoriaService.actualizarCategoria(idCat, categoriaActualizada);
+        if (categoria != null) {
+            return new ResponseEntity<>(categoria, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Categoria no encontrada
+        }
     }
 
-    @GetMapping("/nombre/{nombre}")
-    public Categoria obtenerCategoriaPorNombre(@PathVariable String nombre) {
-        return categoriaService.obtenerCategoriaPorNombre(nombre);
-    }
-
-    @DeleteMapping("/{id}")
-    public void eliminarCategoria(@PathVariable Long id) {
-        categoriaService.eliminarCategoria(id);
+    // Eliminar categoría (DELETE)
+    @DeleteMapping("/{idCat}")
+    public ResponseEntity<Void> deleteCategoria(@PathVariable Long idCat) {
+        categoriaService.eliminarCategoria(idCat);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

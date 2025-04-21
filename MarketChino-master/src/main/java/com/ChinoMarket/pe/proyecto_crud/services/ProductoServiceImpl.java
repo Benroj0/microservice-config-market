@@ -1,10 +1,8 @@
 package com.ChinoMarket.pe.proyecto_crud.services;
 
-import com.ChinoMarket.pe.proyecto_crud.entities.Categoria;
 import com.ChinoMarket.pe.proyecto_crud.entities.Producto;
 import com.ChinoMarket.pe.proyecto_crud.repository.ProductoRepository;
 import com.ChinoMarket.pe.proyecto_crud.repository.CategoriaRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,9 +44,8 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    @Transactional
-    public Producto actualizarProducto(Long id, Producto productoActualizado) {
-        Optional<Producto> optionalProducto = productoRepository.findById(id);
+    public Producto update(Long idPro, Producto productoActualizado) {
+        Optional<Producto> optionalProducto = productoRepository.findById(idPro);
         if (optionalProducto.isPresent()) {
             Producto productoExistente = optionalProducto.get();
 
@@ -57,17 +54,12 @@ public class ProductoServiceImpl implements ProductoService {
             productoExistente.setImagen(productoActualizado.getImagen());
             productoExistente.setCantidad(productoActualizado.getCantidad());
             productoExistente.setPrecio(productoActualizado.getPrecio());
-
-            //ACTUALZIAR CATEGRIA
-            if (productoActualizado.getCategoria() != null) {
-                Categoria categoriaExistente = categoriaRepository.findById(productoActualizado.getCategoria().getIdCat())
-                        .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-                productoExistente.setCategoria(categoriaExistente);
-            }
+            productoExistente.setCategoria(productoActualizado.getCategoria());
 
 
             return productoRepository.save(productoExistente);
         }
         return null;
+
     }
 }

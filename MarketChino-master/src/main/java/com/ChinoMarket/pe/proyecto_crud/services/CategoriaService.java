@@ -10,4 +10,6 @@ public interface CategoriaService {
     Categoria obtenerCategoriaPorId(Long id);
     Categoria obtenerCategoriaPorNombre(String nombre);
     void eliminarCategoria(Long id);
+
+    Categoria actualizarCategoria(Long idCat, Categoria categoriaActualizada);
 }
