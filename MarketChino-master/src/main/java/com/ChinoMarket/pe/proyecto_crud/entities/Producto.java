@@ -1,8 +1,7 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "producto")
@@ -20,7 +19,7 @@ public class Producto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", referencedColumnName = "idCat")
-    //@JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Categoria categoria;
 
 

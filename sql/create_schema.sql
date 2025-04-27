@@ -32,6 +32,15 @@ create table if not exists pedido(
     estado varchar(20) not null
 );
 
+--TABLA DET PEDIDO
+create table if not exists detalle_pedido(
+    id serial primary key,
+    pedido_id integer references pedido(idP),  
+    producto_id integer references producto(idPro),
+    cantidad integer not null,
+    precio_total bigint not null
+);
+
 
 create index idx_producto_nombre on producto(nombre);
 create index idx_pedido_cliente on pedido(cliente_id);  -- Relación con la tabla cliente
