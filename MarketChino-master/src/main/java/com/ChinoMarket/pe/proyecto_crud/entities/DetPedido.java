@@ -1,10 +1,12 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "det_pedido")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "pedido"})
 public class DetPedido {
 
     @Id
@@ -13,10 +15,10 @@ public class DetPedido {
     private Long cantidad;
     private Long precio;
 
-    // Relación ManyToOne (Cada DetPedido pertenece a un Pedido)
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdP", referencedColumnName = "IdP")  // Asegúrate de que 'IdP' en Pedido sea la clave primaria
-    private Pedido pedido;  // Relación inversa con Pedido
+    @JoinColumn(name = "IdP", referencedColumnName = "IdP")
+    private Pedido pedido;
 
     public Long getIdDP() {
         return idDP;

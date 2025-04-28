@@ -1,5 +1,6 @@
 package com.ChinoMarket.pe.proyecto_crud.controllers;
 
+import com.ChinoMarket.pe.proyecto_crud.entities.DetPedido;
 import com.ChinoMarket.pe.proyecto_crud.entities.Pedido;
 import com.ChinoMarket.pe.proyecto_crud.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,15 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
-
-    @PostMapping
+    @PostMapping("/crearpedido")
     public Pedido crearPedido(@RequestBody Pedido pedido) {
-        return pedidoService.crearPedido(pedido);
+        List<DetPedido> detalles = pedido.getDetallesPedido();
+        if (detalles != null) {
+            for (DetPedido detalle : detalles) {
+                detalle.setPedido(pedido);
+            }
+        }
+        return pedidoService.save(pedido);
     }
 
     @GetMapping
