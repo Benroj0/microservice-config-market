@@ -10,19 +10,16 @@ public class Envio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación ManyToOne (Cada Envio pertenece a un Producto)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPro", referencedColumnName = "IdPro")
-    private Producto producto; // Referencia a Producto
+    private Producto producto;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    // Otros atributos
     private String direccion;
     private String estado;
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }

@@ -6,6 +6,5 @@ import java.util.List;
 
 
 public interface DetPedidoRepository extends JpaRepository<DetPedido, Long> {
-    // Métodos personalizados si es necesario
     List<DetPedido> findByPedidoIdP(Long idP);
 }

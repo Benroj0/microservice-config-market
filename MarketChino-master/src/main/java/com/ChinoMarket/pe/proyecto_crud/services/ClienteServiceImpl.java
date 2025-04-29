@@ -49,7 +49,6 @@ public class ClienteServiceImpl  implements ClienteService {
         Optional<Cliente> optionalCliente = clienteRepository.findById(idC);
         if (optionalCliente.isPresent()) {
             Cliente clienteExistente = optionalCliente.get();
-            // Verificamos si los datos han cambiado
             if (!clienteExistente.equals(clienteActualizado)) {
                 clienteExistente.setNombres(clienteActualizado.getNombres());
                 clienteExistente.setEmail(clienteActualizado.getEmail());
@@ -58,7 +57,7 @@ public class ClienteServiceImpl  implements ClienteService {
                 clienteExistente.setDireccion(clienteActualizado.getDireccion());
                 return clienteRepository.save(clienteExistente);
             } else {
-                throw new RuntimeException("No se ha hecho ningún cambio en los datos del cliente");
+                throw new RuntimeException("No se hga hecho ningun cambio");
             }
         }
         return null;

@@ -11,16 +11,12 @@ public class DetProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación ManyToOne (Cada DetProducto pertenece a un Producto)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdPro", referencedColumnName = "IdPro") // Referencia a Producto
+    @JoinColumn(name = "IdPro", referencedColumnName = "IdPro")
     private Producto producto;
-
-    // Otros atributos
     private Long cantidad;
     private Long precio;
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }

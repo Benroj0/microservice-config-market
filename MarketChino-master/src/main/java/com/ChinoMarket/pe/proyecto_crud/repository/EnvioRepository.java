@@ -7,6 +7,5 @@ import java.util.List;
 
 
 public interface EnvioRepository extends JpaRepository<Envio, Long> {
-    // Métodos personalizados si es necesario
     List<Envio> findByCliente_IdC(Long clienteId);
 }
