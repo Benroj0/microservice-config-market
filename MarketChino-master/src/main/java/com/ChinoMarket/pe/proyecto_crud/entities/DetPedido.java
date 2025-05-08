@@ -13,8 +13,8 @@ public class DetPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDP;
     private Long cantidad;
-    private Long precio;
-
+    private Long precioUnitario;
+    //se jala el producto
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdP", referencedColumnName = "IdP")
@@ -37,11 +37,11 @@ public class DetPedido {
     }
 
     public Long getPrecio() {
-        return precio;
+        return precioUnitario;
     }
 
-    public void setPrecio(Long precio) {
-        this.precio = precio;
+    public void setPrecio(Long precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public Pedido getPedido() {

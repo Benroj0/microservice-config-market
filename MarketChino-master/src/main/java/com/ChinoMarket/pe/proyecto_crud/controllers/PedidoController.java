@@ -18,7 +18,7 @@ public class PedidoController {
     public Pedido crearPedido(@RequestBody Pedido pedido) {
         List<DetPedido> detalles = pedido.getDetallesPedido();
         if (detalles != null) {
-            for (DetPedido detalle : detalles) {
+            for (DetPedido detalle : detalles) { //si la venta no se realiza, generar error
                 detalle.setPedido(pedido);
             }
         }

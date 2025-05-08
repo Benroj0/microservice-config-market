@@ -1,17 +1,15 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.*;
-
 @Entity
 @Table(name = "pedido")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "detPedido"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "detPedido" })
 public class Pedido {
 
     @Id
