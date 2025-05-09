@@ -15,12 +15,23 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Stock crearStock(Stock stock) {
-        int entradas = stock.getEntradas() != null ? stock.getEntradas() : 0;
-        int salidas = stock.getSalidas() != null ? stock.getSalidas() : 0;
-        stock.setBalance(entradas - salidas);
-        return stockRepository.save(stock);
-    }
+        List<Stock> existentes = stockRepository.findByProductoIdPro(stock.getProducto().getIdPro());
 
+        if (!existentes.isEmpty()) {
+            Stock existente = existentes.get(0);
+            existente.setEntradas(stock.getEntradas() != null ? stock.getEntradas() : existente.getEntradas());
+            existente.setSalidas(stock.getSalidas());
+            existente.setBalance(stock.getBalance());
+
+            return stockRepository.save(existente);
+        } else {
+            if (stock.getEntradas() == null) stock.setEntradas(0);
+            if (stock.getSalidas() == null) stock.setSalidas(0);
+            stock.setBalance(stock.getEntradas() - stock.getSalidas());
+
+            return stockRepository.save(stock);
+        }
+    }
     @Override
     public List<Stock> obtenerTodosLosStocks() {
         return stockRepository.findAll();

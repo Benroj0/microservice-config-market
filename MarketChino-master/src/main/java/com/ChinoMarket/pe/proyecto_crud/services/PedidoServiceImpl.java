@@ -62,7 +62,7 @@ public class PedidoServiceImpl implements PedidoService {
                 stockService.crearStock(stock);
             }
         }
-        
+
         pedido.setTotalpago(totalPagoCalculado);
 
         return pedidoRepository.save(pedido);
