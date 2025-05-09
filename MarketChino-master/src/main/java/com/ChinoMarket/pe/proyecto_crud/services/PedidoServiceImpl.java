@@ -27,6 +27,11 @@ public class PedidoServiceImpl implements PedidoService {
     public Pedido save(Pedido pedido) {
         long totalPagoCalculado = 0;
 
+        Pedido ultimoPedido = pedidoRepository.findTopByOrderByIdPDesc();
+        long siguienteNumero = (ultimoPedido != null) ? ultimoPedido.getIdP() + 1 : 1;
+
+        pedido.setNumpedido(siguienteNumero);
+        pedido.setNumerocomprobante(10000 + siguienteNumero);
         if (pedido.getDetallesPedido() != null) {
             for (DetPedido detalle : pedido.getDetallesPedido()) {
                 detalle.setPedido(pedido);
