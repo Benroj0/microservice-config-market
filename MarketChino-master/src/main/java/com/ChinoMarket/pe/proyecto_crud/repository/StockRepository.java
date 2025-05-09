@@ -6,6 +6,5 @@ import java.util.List;
 
 
 public interface StockRepository extends JpaRepository<Stock, Long> {
-    // Métodos personalizados si es necesario
     List<Stock> findByProductoIdPro(Long idPro);
 }

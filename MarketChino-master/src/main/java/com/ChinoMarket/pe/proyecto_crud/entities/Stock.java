@@ -13,10 +13,13 @@ public class Stock {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdPro", referencedColumnName = "IdPro")
+    private Producto producto;
+
     private String descripcion;
     private Integer entradas;
     private Integer salidas;
     private Integer balance;
+
 
     public Long getId() {
         return id;
@@ -24,6 +27,14 @@ public class Stock {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public String getDescripcion() {

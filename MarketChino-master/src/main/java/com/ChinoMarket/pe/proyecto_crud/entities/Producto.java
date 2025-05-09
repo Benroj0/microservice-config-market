@@ -3,6 +3,8 @@ package com.ChinoMarket.pe.proyecto_crud.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "producto")
 public class Producto {
@@ -14,8 +16,11 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private String imagen;
-    private Long cantidad;
     private Long precio;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("producto")
+    private List<Stock> stockList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", referencedColumnName = "idCat")
@@ -71,11 +76,4 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public Long getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Long cantidad) {
-        this.cantidad = cantidad;
-    }
 }

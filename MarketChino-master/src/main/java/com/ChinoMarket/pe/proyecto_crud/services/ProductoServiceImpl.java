@@ -52,7 +52,6 @@ public class ProductoServiceImpl implements ProductoService {
             productoExistente.setNombre(productoActualizado.getNombre());
             productoExistente.setDescripcion(productoActualizado.getDescripcion());
             productoExistente.setImagen(productoActualizado.getImagen());
-            productoExistente.setCantidad(productoActualizado.getCantidad());
             productoExistente.setPrecio(productoActualizado.getPrecio());
             productoExistente.setCategoria(productoActualizado.getCategoria());
 

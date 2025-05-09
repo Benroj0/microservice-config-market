@@ -14,22 +14,25 @@ public class StockServiceImpl implements StockService {
     private StockRepository stockRepository;
 
     @Override
-    public Stock crearDetProducto(Stock detProducto) {
-        return stockRepository.save(detProducto);
+    public Stock crearStock(Stock stock) {
+        int entradas = stock.getEntradas() != null ? stock.getEntradas() : 0;
+        int salidas = stock.getSalidas() != null ? stock.getSalidas() : 0;
+        stock.setBalance(entradas - salidas);
+        return stockRepository.save(stock);
     }
 
     @Override
-    public List<Stock> obtenerTodosLosDetProductos() {
+    public List<Stock> obtenerTodosLosStocks() {
         return stockRepository.findAll();
     }
 
     @Override
-    public List<Stock> obtenerDetProductoPorProductoId(Long productoIdPro) {
+    public List<Stock> obtenerStockPorProductoId(Long productoIdPro) {
         return stockRepository.findByProductoIdPro(productoIdPro);
     }
 
     @Override
-    public void eliminarDetProducto(Long id) {
+    public void eliminarStock(Long id) {
         stockRepository.deleteById(id);
     }
 }

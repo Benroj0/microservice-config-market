@@ -19,8 +19,9 @@ public class ProductoController {
     private ProductoService productoService;
 
     @PostMapping
-    public Producto crearProducto(@RequestBody Producto producto) {
-        return productoService.crearProducto(producto);
+    public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
+        Producto creado = productoService.crearProducto(producto);
+        return new ResponseEntity<>(creado, HttpStatus.CREATED);
     }
 
     @GetMapping
