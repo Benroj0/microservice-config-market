@@ -1,0 +1,6 @@
+db:
+  url: jdbc:postgresql://localhost:5433/chinomarket
+  username: chinomarketserver
+  password: chinomarket2025
+  maximum-pool-size: 5
+  connection-timeout: 20000
