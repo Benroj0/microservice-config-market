@@ -1,13 +1,25 @@
 spring:
   datasource:
-    hikari:
-      connection-timeout: '20000'
-      maximum-pool-size: '5'
-    password: chinomarket2025
     username: chinomarketserver
+    password: chinomarket2025
     url: jdbc:postgresql://localhost:5433/chinomarket
+    hikari:
+     maximum-pool-size: '5'
+     connection-timeout: '20000'
+
+
   application:
     name: chinomarket-crud
+
+  profiles:
+    #prod     #profile in production
+    #default  #profile in dev
+    default: default
+
+  config:
+    import: 'optional:configserver:http://localhost:7777'
+    #import: 'optional:configserver:${CONFIG_SERVER_HOST}'
+
   jpa:
     show-sql: 'true'
     hibernate:
