@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 b7a79d4ddde9da432ced6962f0fead9d76ed1d84 Benroj0 <brodriguezjimenez13@gmail.com> 1748113065 -0500	clone: from https://github.com/Benroj0/distribuidas-proyecto.git
+b7a79d4ddde9da432ced6962f0fead9d76ed1d84 8148444e90045dc18b662e0a1c22f5aeaabf1be5 Benroj0 <brodriguezjimenez13@gmail.com> 1748114084 -0500	commit: config server
+8148444e90045dc18b662e0a1c22f5aeaabf1be5 348771cbc4a34b2b25865b42d30d157408fbadaa Benroj0 <brodriguezjimenez13@gmail.com> 1748114226 -0500	commit: config
+348771cbc4a34b2b25865b42d30d157408fbadaa d9d0b97968cbdc05e904eec9c2b532e91c9d2497 Benroj0 <brodriguezjimenez13@gmail.com> 1748114312 -0500	commit: config server
+d9d0b97968cbdc05e904eec9c2b532e91c9d2497 f903b480b826a9deab6c25daf4cf1a7d9a6bca57 Benroj0 <brodriguezjimenez13@gmail.com> 1748115799 -0500	commit: Ignorar microservice-config y archivos innecesarios
+f903b480b826a9deab6c25daf4cf1a7d9a6bca57 7d0aac380eb73dc30cf2b19a948739965e590aa6 Benroj0 <brodriguezjimenez13@gmail.com> 1748118256 -0500	commit: config terminado
+7d0aac380eb73dc30cf2b19a948739965e590aa6 2744d589651d11d9e5f2ccbb56c16050dba51b21 Benroj0 <brodriguezjimenez13@gmail.com> 1748118430 -0500	pull --rebase origin master (start): checkout 2744d589651d11d9e5f2ccbb56c16050dba51b21
+2744d589651d11d9e5f2ccbb56c16050dba51b21 7d0aac380eb73dc30cf2b19a948739965e590aa6 Benroj0 <brodriguezjimenez13@gmail.com> 1748119272 -0500	rebase (abort): returning to refs/heads/master
+7d0aac380eb73dc30cf2b19a948739965e590aa6 7d0aac380eb73dc30cf2b19a948739965e590aa6 Benroj0 <brodriguezjimenez13@gmail.com> 1748642465 -0500	checkout: moving from master to JassonLaureano
