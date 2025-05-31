@@ -2,6 +2,6 @@ db:
   username: chinomarketserver-prod
   maximum-pool-size: 5
   connection-timeout: 20000
-  url: jdbc:postgresql://localhost:5433/chinomarket
+  url: jdbc:postgresql://localhost:5435/chinomarket
   password: chinomarket2025-prod
   driverClassName: org.postgresql.Driver
