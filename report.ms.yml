@@ -1,0 +1,2 @@
+report:
+  template: "El pedido número {numpedido} con comprobante {tipocomprobante} - {numerocomprobante} fue emitido el {fechaEmision} por el cliente {cliente.nombre}. El estado actual es {estado} y se pagó con {metodopago} un total de S/.{totalpago}."
