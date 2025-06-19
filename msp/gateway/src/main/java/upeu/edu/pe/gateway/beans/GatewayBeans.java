@@ -34,6 +34,14 @@ public class GatewayBeans {
                         .uri("lb://chinomarket-crud")
                 )
                 .route(route -> route
+                        .path("/chinomarket-crud/categoria/**")
+                        .uri("lb://chinomarket-crud")
+                )
+                .route(route -> route
+                        .path("/chinomarket-crud/stock/**")
+                        .uri("lb://chinomarket-crud")
+                )
+                .route(route -> route
                         .path("/report-ms/report/**")
                         .uri("lb://report-ms")
                 )

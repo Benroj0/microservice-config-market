@@ -1,10 +1,12 @@
 package com.ChinoMarket.pe.proyecto_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "stock")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler"})
 public class Stock {
 
     @Id
