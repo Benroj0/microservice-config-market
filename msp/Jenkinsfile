@@ -1,0 +1,114 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'MAVEN_HOME'
+    }
+
+    environment {
+        DOCKER_PROJECT_NAME = 'msp'
+        SONARQUBE_INSTANCE = 'sonarqube'
+        SERVICES = "config-server gateway marketchino-master registry-server report-ms auth-server"
+        DB_NAME = "chinomarket"
+        DB_USER = "chinomarketserver"
+        DB_PASSWORD = "chinomarket2025"
+        REPO_URL = "https://github.com/Fabri-art/proyecto_Dockerizado.git"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def services = env.SERVICES.split()
+                    withSonarQubeEnv(env.SONARQUBE_INSTANCE) {
+                        for (svc in services) {
+                            dir("msp/${svc}") {
+                                echo "📊 Analizando ${svc}..."
+                                sh 'mvn clean verify sonar:sonar -DskipTests'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    echo "✅ Esperando resultados del análisis..."
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage('Build and Dockerize') {
+            steps {
+                script {
+                    def services = env.SERVICES.split()
+
+                    for (svc in services) {
+                        def imageName = "${svc.toLowerCase()}:latest"
+                        echo "⚙ Construyendo imagen local para ${svc}..."
+
+                        dir("msp/${svc}") {
+                            sh 'mvn clean package -DskipTests'
+                            sh "docker build -t ${imageName} ."
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Clean Database Volume') {
+            steps {
+                script {
+                    echo '🧹 Eliminando volumen PostgreSQL para reinicialización...'
+                    sh 'docker volume rm msp_postgres_data || true'
+                }
+            }
+        }
+
+        stage('Deploy with Docker Compose') {
+            steps {
+                dir('msp') {
+                    script {
+                        echo '🚀 Levantando microservicios con Docker Compose...'
+
+                        try {
+                            sh "docker-compose -f docker-compose.yml -p ${env.DOCKER_PROJECT_NAME} down -v --remove-orphans"
+                        } catch (Exception e) {
+                            echo "⚠ No había contenedores corriendo"
+                        }
+
+                        sh "docker-compose -f docker-compose.yml -p ${env.DOCKER_PROJECT_NAME} up -d --build"
+
+                        echo '⏳ Esperando 30 segundos para levantar contenedores...'
+                        sleep(30)
+
+                        sh "docker ps"
+                        sh "docker logs --tail 100 gateway || true"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo '🏁 === FINAL DEL PIPELINE ==='
+        }
+        success {
+            echo '🎉 ✓ Microservicios desplegados correctamente'
+        }
+        failure {
+            echo '💥 ✗ El pipeline falló, revisar errores'
+        }
+    }
+}
