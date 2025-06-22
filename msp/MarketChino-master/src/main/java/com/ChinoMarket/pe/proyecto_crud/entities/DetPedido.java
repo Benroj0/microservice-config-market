@@ -22,6 +22,34 @@ public class DetPedido {
     @JoinColumn(name = "IdP", referencedColumnName = "IdP")
     private Pedido pedido;
 
+    @ManyToOne
+    @JoinColumn(name = "productounidad_id")
+    private ProductoUnidad productoUnidad;
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Long getIdDP() {
+        return idDP;
+    }
+
+    public void setIdDP(Long idDP) {
+        this.idDP = idDP;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
     public Long getPrecioUnitario() {
         return precioUnitario;
     }
@@ -38,27 +66,11 @@ public class DetPedido {
         this.producto = producto;
     }
 
-    public Long getIdDP() {
-        return idDP;
+    public ProductoUnidad getProductoUnidad() {
+        return productoUnidad;
     }
 
-    public void setIdDP(Long idDP) {
-        this.idDP = idDP;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setProductoUnidad(ProductoUnidad productoUnidad) {
+        this.productoUnidad = productoUnidad;
     }
 }

@@ -41,10 +41,10 @@ public class ReportHelper {
         map.put("fechaEmision", pedido.getFechaEmision() != null ? pedido.getFechaEmision().toString() : "");
 
         // Cliente
-        if (pedido.getCliente() != null) {
-            map.put("clienteNombre", pedido.getCliente().getNombres() != null ? pedido.getCliente().getNombres() : "");
+        if (pedido.getCliente() != null && pedido.getCliente().getNombres() != null) {
+            map.put("clientenombre", pedido.getCliente().getNombres());
         } else {
-            map.put("clienteNombre", "");
+            map.put("clientenombre", "");  // Si no hay cliente, lo dejamos vacío
         }
 
         return map;

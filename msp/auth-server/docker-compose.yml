@@ -1,0 +1,15 @@
+
+version: '3.8'
+
+services:
+
+    db:
+      image: postgres:16.1
+      container_name: db-security
+      restart: always
+      environment:
+        POSTGRES_DB: 'security'
+        POSTGRES_USER: 'security_user'
+        POSTGRES_PASSWORD: 'security_2025'
+      ports:
+        - '5433:5432'

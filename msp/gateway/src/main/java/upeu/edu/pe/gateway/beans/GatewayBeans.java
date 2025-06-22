@@ -42,8 +42,20 @@ public class GatewayBeans {
                         .uri("lb://chinomarket-crud")
                 )
                 .route(route -> route
+                        .path("/chinomarket-crud/admin/**")
+                        .uri("lb://chinomarket-crud")
+                )
+                .route(route -> route
+                        .path("/chinomarket-crud/unidades-medida/**")
+                        .uri("lb://chinomarket-crud")
+                )
+                .route(route -> route
                         .path("/report-ms/report/**")
                         .uri("lb://report-ms")
+                )
+                .route(route -> route
+                        .path("/auth-server/auth/**")
+                        .uri("lb://auth-server")
                 )
                 .build();
     }
